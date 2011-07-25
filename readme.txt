@@ -13,11 +13,12 @@ Usage: ./i2ss input_cloud.pcd distance_threshold
                 --normal_weight nwt                                  (default: 0.1)             [Normal distance weight (for normal plane segmentation)]
 
        *Not needed in normal-based segmentation
-       *Note: make sure the input file is completely clean, as it does not generate or ignore PCL file headers!
 
 ------------------------------------------------
 Usage: ./scale inputFile outputFile
        Options: none
+
+       *Note: make sure the input file is completely clean, as it does not generate or ignore PCL file headers!
 
 The parameters used to generate the resulting PCDs are in file params.doc.
 
