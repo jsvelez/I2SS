@@ -3,7 +3,7 @@ Compilation instructions (assuming you already have PCL 1.0.1 installed and a Un
 2) Open a terminal, cd to the newly-created subdirectory and do "cmake .."
 3) After that, just "make" should do the trick.
 
-Usage: ./cluster_subtraction input_cloud.pcd distance_threshold
+Usage: ./i2ss input_cloud.pcd distance_threshold
        Options: --sor mean_k stdev_threshold                         (default: 50 1)            [Parameters for statistic outlier removal*]
                 --cluster tolerance min_points max_points            (default: 0.02 250 2500)   [Parameters for Euclidean cluster extraction]
                 --method [ransac | mlesac | rmsac | rransac]         (default: ransac)          [Estimation method to use for segmentation]
