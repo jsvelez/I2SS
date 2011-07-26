@@ -205,4 +205,4 @@ int
 
   return (0);
 }
-		 << "[--normal_weight nwt]\n";
+
