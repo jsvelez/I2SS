@@ -116,6 +116,7 @@ int
 		cerr << "Usage: ./cluster_subtraction input_cloud.pcd distance_threshold [--sor mean_k stdev_threshold] "
              << "[--cluster tolerance min_pts max_pts]\n"
 			 << "[--model plane | line | circle | sphere | cylinder | normal_plane | parallel_plane | registration]\n";
+		     << "[--normal_weight nwt]\n";
 		arg_error = true;
 	}
     ++opt_index;
@@ -130,8 +131,7 @@ int
        << "Minimum number of cluster points set to " << pars.cmin << ".\n"
        << "Maximum number of cluster points set to " << pars.cmax << ".\n";
 
-  sensor_msgs::PointCloud2::Ptr cloud_blob (new sensor_msgs::PointCloud2), cloud_filtered_blob (new sensor_msgs::PointCloud2);
-  PointCloud<PointXYZ>::Ptr cloud_filtered (new PointCloud<PointXYZ>); 
+  PointCloud<PointXYZ>::Ptr cloud_blob (new PointCloud<PointXYZ>), cloud_filtered (new PointCloud<PointXYZ>); 
 
   // Fill in the cloud data
   PCDReader reader;
@@ -144,13 +144,10 @@ int
   cerr << "PointCloud before filtering: " << cloud_size << " data points." << endl;
 
   // Create the filtering object: downsample the dataset using a leaf size of 1cm
-  VoxelGrid<sensor_msgs::PointCloud2> sor;
+  VoxelGrid<PointXYZ> sor;
   sor.setInputCloud (cloud_blob);
   sor.setLeafSize (0.01, 0.01, 0.01);
-  sor.filter (*cloud_filtered_blob);
-
-  // Convert to the templated PointCloud
-  fromROSMsg (*cloud_filtered_blob, *cloud_filtered);
+  sor.filter (*cloud_filtered);
 
   size_t cloud_filtered_size = cloud_filtered->width * cloud_filtered->height;
 
@@ -208,4 +205,4 @@ int
 
   return (0);
 }
-
+		 << "[--normal_weight nwt]\n";
