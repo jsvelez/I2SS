@@ -1,0 +1,4 @@
+A "segment" is a planar patch of points.
+
+A "cluster" is a group of points that could not be made into a planar patch.
+
