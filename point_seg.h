@@ -15,11 +15,14 @@ namespace pcl
 	  float data_s[4];
 	};
 	EIGEN_MAKE_ALIGNED_OPERATOR_NEW
-} EIGEN_ALIGN16;
-inline std::ostream& operator<< (std::ostream& os, const PointSegment& p)
-{
+  } EIGEN_ALIGN16;
+
+  inline std::ostream& operator<< (std::ostream& os, const PointSegment& p)
+  {
   os << "(" << p.x << "," << p.y << "," p.z << ") [segmentID: " << p.segment_id << "]";
   return os;
+  }
 }
+
 
 #endif 
