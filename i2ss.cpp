@@ -115,7 +115,7 @@ int
 	else {
 		cerr << "Usage: ./cluster_subtraction input_cloud.pcd distance_threshold [--sor mean_k stdev_threshold] "
              << "[--cluster tolerance min_pts max_pts]\n"
-			 << "[--model plane | line | circle | sphere | cylinder | normal_plane | parallel_plane | registration]\n";
+			 << "[--model plane | line | circle | sphere | cylinder | normal_plane | parallel_plane | registration]\n"
 		     << "[--normal_weight nwt]\n";
 		arg_error = true;
 	}
@@ -164,39 +164,8 @@ int
 	useful_segment_points = subtract_segments_normal(header, pars, cloud_filtered);
   else 
 	useful_segment_points = subtract_segments(header, pars, cloud_filtered);
-
-  // Creates the KdTree object for the search method of the extraction
-  KdTree<PointXYZ>::Ptr tree (new KdTreeFLANN<PointXYZ>);
-  tree->setInputCloud (cloud_filtered);
   
-  vector<PointIndices> cluster_indices; //a vector of vector<int>s that will contain the indices for the points in each cluster
-
-  //Extracts clusters of points close enough to each other
-  EuclideanClusterExtraction<PointXYZ> ec;
-  ec.setClusterTolerance (pars.ctol); 
-  ec.setMinClusterSize (pars.cmin);
-  ec.setMaxClusterSize (pars.cmax);
-  ec.setSearchMethod (tree);
-  ec.setInputCloud( cloud_filtered);
-  ec.extract (cluster_indices);
-
-  //Writes each point cluster into its own cloud object and saves them to disk.
-  int j = 0;
-  size_t cluster_points = 0;
-  for (vector<PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
-  {
-      PointCloud<PointXYZ>::Ptr cloud_cluster (new PointCloud<PointXYZ>);
-      for (IndexIterator pit = it->indices.begin (); pit != it->indices.end (); pit++)
-          cloud_cluster->points.push_back (cloud_filtered->points[*pit]); //*
-
-      cerr << "PointCloud representing the Cluster: " << cloud_cluster->points.size () << " data points." << endl;
-	  cluster_points += cloud_cluster->points.size();
-      stringstream ss;
-      ss << header.method_type << "_result_cluster" << j << ".pcd";
-      writer.write<PointXYZ> (ss.str (), *cloud_cluster, false); //*
-      j++;
-  }
-
+  size_t cluster_points = subtract_clusters(header.method_type, pars, cloud_filtered);
   cerr << "Clustered out " << cluster_points << " points (" << 100.0 * cluster_points / cloud_filtered_size << "% of input cloud)" << endl;
 
   size_t total_useful_points = useful_segment_points + cluster_points;
