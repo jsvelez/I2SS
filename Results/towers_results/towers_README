@@ -1,0 +1,11 @@
+DATASET: towers.pcd
+
+SEGMENTATION RESULTS:
+   -> using RANSAC: We were able to obtain a consistent enough segmentation despite the uneven, rolling terrain. I2SS managed to extract six of the
+                    8 towers as separate objects; the remaining two were close enough for the RANSAC stage to identify them as part of the same plane.
+                    Likewise, the entire line of half-trees were detected as a single vertical plane, though perhaps it's no big deal for this case.
+
+   -> using MLESAC: The results were noticeably poorer than RANSAC's case, even when using normal-plane segmentation, but I2SS still managed to hit five
+                    towers without confusion. Several thin patches of ground near the edges were segmented out as a result of using normals.
+
+Conclusion: Definitely not one of the simplest cases, but segmentation quality is decent enough for what we wanted to achieve.
