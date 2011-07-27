@@ -4,6 +4,8 @@
 using namespace std;
 using namespace pcl;
 
+typedef vector<int>::const_iterator IndexIterator;
+
 //There are a ton of parameters that need passing around, so might as well struct them up 
 struct base_fields {
   base_fields (int met, int mod, string mtype, string modtype) :
@@ -216,4 +218,43 @@ size_t subtract_segments_normal(base_fields& h, params& p, PointCloud<PointXYZ>:
 
 }
 
+size_t subtract_clusters(const string& method, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
+
+  // Creates the KdTree object for the search method of the extraction
+  KdTree<PointXYZ>::Ptr tree (new KdTreeFLANN<PointXYZ>);
+  tree->setInputCloud (input_cloud);
+  
+  vector<PointIndices> cluster_indices; //a vector of vector<int>s that will contain the indices for the points in each cluster
+  PCDWriter writer;
+
+  //Extracts clusters of points close enough to each other
+  EuclideanClusterExtraction<PointXYZ> ec;
+  ec.setClusterTolerance (p.ctol); 
+  ec.setMinClusterSize (p.cmin);
+  ec.setMaxClusterSize (p.cmax);
+  ec.setSearchMethod (tree);
+  ec.setInputCloud( input_cloud);
+  ec.extract (cluster_indices);
+
+  //Writes each point cluster into its own cloud object and saves them to disk.
+  int j = 0;
+  size_t cluster_pts = 0;
+  for (vector<PointIndices>::const_iterator it = cluster_indices.begin (); it != cluster_indices.end (); ++it)
+  {
+      PointCloud<PointXYZ>::Ptr cloud_cluster (new PointCloud<PointXYZ>);
+      for (IndexIterator pit = it->indices.begin (); pit != it->indices.end (); pit++)
+          cloud_cluster->points.push_back (input_cloud->points[*pit]); //*
+
+      cerr << "PointCloud representing the Cluster: " << cloud_cluster->points.size () << " data points." << endl;
+	  cluster_pts += cloud_cluster->points.size();
+      stringstream ss;
+      ss << method << "_result_cluster" << j << ".pcd";
+      writer.write<PointXYZ> (ss.str (), *cloud_cluster, false); //*
+      j++;
+  }
+
+  return cluster_pts;
+}
+
 #endif
+
