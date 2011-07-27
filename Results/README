@@ -1,4 +1,5 @@
-A "segment" is a planar patch of points.
+Notes:
 
-A "cluster" is a group of points that could not be made into a planar patch.
+1. The term "segment" refers to a group of points that fits reasonably well to some specified mathematical model, whether a plane, a line, a circle, or any other arbitrary geometric or polygonal surface. On the other hand, a "cluster" denotes a group of points packed together within a certain threshold distance of each other that can potentially, but is not necessarily guaranteed to represent an arbitrary surface or object of interest; in layman's terms, they are what's left after all segments in a point-cloud have been extracted.
 
+2. When visualizing the resulting point-clouds, keep in mind that, at least in pcd_viewer, all points rendered in the same color are assumed to belong to the same cloud. This makes it easier to verify the correctness of our segmentations. As a general rule, extremely disconnected or mismatched surfaces (i.e. a roof and part of a tree) should ideally NOT belong to the same object. These issues will be worked out eventually.

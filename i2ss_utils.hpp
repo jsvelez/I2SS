@@ -6,7 +6,7 @@ using namespace pcl;
 
 typedef vector<int>::const_iterator IndexIterator;
 
-// TODO: Description of this file
+// Structures and core methods for the implementation of iterative two-stage segmentation (see i2ss.cpp for more details)
 
 //There are a ton of parameters that need passing around, so might as well struct them up 
 struct base_fields {
@@ -44,8 +44,10 @@ void deleteOldResults(const string& category) {
 
 }
 
+// Subtracts all segments consistent with the specified model from the original point-cloud and writes 
+// each to a separate file for easier visualization.
 size_t subtract_segments(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
-// TODO: What does this function do?
+
   ModelCoefficients::Ptr coefficients (new ModelCoefficients ());
   PointIndices::Ptr inliers (new PointIndices ());
   PointCloud<PointXYZ>::Ptr cloud_p (new PointCloud<PointXYZ> ()), seg_outliers (new PointCloud<PointXYZ>());
@@ -129,8 +131,10 @@ size_t subtract_segments(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& i
 
 }
 
+// Subtracts all segments consistent with the specified (normals-based) model from the original point-cloud and writes 
+// each to a separate file for easier visualization.
 size_t subtract_segments_normal(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
-// TODO: What does this function do?
+
   ModelCoefficients::Ptr coefficients (new ModelCoefficients ());
   PointIndices::Ptr inliers (new PointIndices ());
   PointCloud<PointXYZ>::Ptr cloud_p (new PointCloud<PointXYZ> ());
@@ -220,6 +224,8 @@ size_t subtract_segments_normal(base_fields& h, params& p, PointCloud<PointXYZ>:
 
 }
 
+// Subtracts all point clusters that meet the required parameters from the input cloud and writes each cluster to disk for
+// easy visualization.
 size_t subtract_clusters(const string& method, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
 
   // Creates the KdTree object for the search method of the extraction
