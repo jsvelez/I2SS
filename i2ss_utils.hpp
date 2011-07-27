@@ -6,6 +6,8 @@ using namespace pcl;
 
 typedef vector<int>::const_iterator IndexIterator;
 
+// TODO: Description of this file
+
 //There are a ton of parameters that need passing around, so might as well struct them up 
 struct base_fields {
   base_fields (int met, int mod, string mtype, string modtype) :
@@ -43,7 +45,7 @@ void deleteOldResults(const string& category) {
 }
 
 size_t subtract_segments(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
-
+// TODO: What does this function do?
   ModelCoefficients::Ptr coefficients (new ModelCoefficients ());
   PointIndices::Ptr inliers (new PointIndices ());
   PointCloud<PointXYZ>::Ptr cloud_p (new PointCloud<PointXYZ> ()), seg_outliers (new PointCloud<PointXYZ>());
@@ -128,7 +130,7 @@ size_t subtract_segments(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& i
 }
 
 size_t subtract_segments_normal(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
-
+// TODO: What does this function do?
   ModelCoefficients::Ptr coefficients (new ModelCoefficients ());
   PointIndices::Ptr inliers (new PointIndices ());
   PointCloud<PointXYZ>::Ptr cloud_p (new PointCloud<PointXYZ> ());

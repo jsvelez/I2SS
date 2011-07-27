@@ -1,6 +1,11 @@
 #ifndef POINT_SEG_H_
 #define POINT_SEG_H_
 
+// This struct is a custom PCL point type to store a 3D coordinate and a segment_id.
+// This way the result of a segmentation can be stored directly on the points as labels.
+// When you see "4D", that is simply to do a fancy bit alignment, we are really only interested
+// in storing 3D coordinates.
+
 namespace pcl 
 {
   struct PointSegment 

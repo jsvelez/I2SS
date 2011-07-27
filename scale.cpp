@@ -7,6 +7,9 @@
 
 using namespace std;
 
+// TODO: This program scales the coordinates of an input file?
+// By what? A constant factor? Why is this done?
+
 int main (int argc, char** argv) {
 
 	if (argc < 3) {
