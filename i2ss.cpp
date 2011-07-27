@@ -16,7 +16,13 @@
 using namespace std;
 using namespace pcl;
 
-// TODO: Description of this file
+/* Applies an iterative two-stage segmentation to the supplied point-cloud.
+*  The first pass searches for all points that fit the given model (i.e. a plane) well enough, and segments them out.
+*  The second pass takes the remaining points after segmentation and searches for all sets of points close enough to
+*  each other and groups them into clusters.
+*  Essentially, the original point-cloud gets split up into its individual surface components.
+*/
+
 int
  main (int argc, char** argv)
 {
