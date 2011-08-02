@@ -7,9 +7,6 @@
 
 using namespace std;
 
-// TODO: This program scales the coordinates of an input file?
-// By what? A constant factor? Why is this done?
-
 int main (int argc, char** argv) {
 
 	if (argc < 3) {
@@ -55,14 +52,16 @@ int main (int argc, char** argv) {
 	max[1] = *max_element(y.begin(), y.end());
 	max[2] = *max_element(z.begin(), z.end());
 
-	cout << setprecision(12) << max[0] << " " << max[1] << " " << max[2] << endl;
+    double true_max = *max_element(max, max+3);
+
+	cout << setprecision(12) << true_max<< endl;
 
 	//Scales all coordinate axes in parallel
 	#pragma omp parallel for 
 	for (size_t i=0; i < x.size(); ++i) {
-		x[i] = (2*(x[i] / max[0]))-1;
-		y[i] = (2*(y[i] / max[1]))-1;
-		z[i] = (2*(z[i] / max[2]))-1;
+		x[i] = (2*(x[i] / true_max))-1;
+		y[i] = (2*(y[i] / true_max))-1;
+		z[i] = (2*(z[i] / true_max))-1;
 	}
 
 	//write the scaled points to file
