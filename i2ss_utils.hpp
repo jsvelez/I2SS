@@ -6,8 +6,6 @@ using namespace pcl;
 
 typedef vector<int>::const_iterator IndexIterator;
 
-// Structures and core methods for the implementation of iterative two-stage segmentation (see i2ss.cpp for more details)
-
 //There are a ton of parameters that need passing around, so might as well struct them up 
 struct base_fields {
   base_fields (int met, int mod, string mtype, string modtype) :
@@ -44,8 +42,26 @@ void deleteOldResults(const string& category) {
 
 }
 
-// Subtracts all segments consistent with the specified model from the original point-cloud and writes 
-// each to a separate file for easier visualization.
+void writeParameters(params& p, const string& mtype, const string& filename) {
+  
+  string f = filename + "_" + mtype + ".params";
+  ofstream outfile(f.c_str(), ios::out);
+
+  outfile << "Parameters used for segmentation of " + filename + ":\n"
+	  << "Method used: " << mtype << "\n\n";
+  
+  outfile << "delta= " << p.sr << "\n"
+	  << "mean-k= " << p.mean_k << "\n"
+	  << "sigma= " << p.stdev << "\n"
+	  << "ctol= " << p.ctol << "\n"
+	  << "cmin= " << p.cmin << "\n"
+	  << "cmax= " << p.cmax << "\n"
+	  << "ndist-weight= " << p.ndist_w << "\n";
+
+  outfile.close();
+}
+  
+
 size_t subtract_segments(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
 
   ModelCoefficients::Ptr coefficients (new ModelCoefficients ());
@@ -131,8 +147,6 @@ size_t subtract_segments(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& i
 
 }
 
-// Subtracts all segments consistent with the specified (normals-based) model from the original point-cloud and writes 
-// each to a separate file for easier visualization.
 size_t subtract_segments_normal(base_fields& h, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
 
   ModelCoefficients::Ptr coefficients (new ModelCoefficients ());
@@ -224,8 +238,6 @@ size_t subtract_segments_normal(base_fields& h, params& p, PointCloud<PointXYZ>:
 
 }
 
-// Subtracts all point clusters that meet the required parameters from the input cloud and writes each cluster to disk for
-// easy visualization.
 size_t subtract_clusters(const string& method, params& p, PointCloud<PointXYZ>::Ptr& input_cloud) {
 
   // Creates the KdTree object for the search method of the extraction
