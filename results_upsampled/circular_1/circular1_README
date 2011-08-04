@@ -1,0 +1,17 @@
+DATASETS: circular1.pcd (original)
+          circular1_final.pcd (upsampled version)
+          circular1_final.pcd (upsampled version w/ different parameters)
+
+SEGMENTATION RESULTS:
+        -->using RANSAC: The best RANSAC result was the one obtained from the upsampled version. The roof of the circular building, part
+                         of the wall points grabbed by the aerial scan, and the ground plane were all segmented out neatly, as well as a 
+                         cluster near one of the corners that looks like the roof of a shed or something. The alternate upsample segmented
+                         the circular roof into two pieces, though everything else remained accurate. 
+
+         -->using MLESAC: MLESAC was generally more sensitive to small changes in ground elevation; it detected the small 'slope' off the side
+                          of the building for all three versions of this dataset. Both upsampled versions also detected a couple more short height
+                          variations near the opposite side.
+                          
+MISC. OBSERVATIONS:
+          When comparing the original point-clouds to the combined output in all three versions, there seems to be some noticeable banding in the
+          results, even though the filtered cloud (pre-segmentation) has exactly or almost exactly the same number of points as the actual input.

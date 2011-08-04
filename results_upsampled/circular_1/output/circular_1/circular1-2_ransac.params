@@ -1,0 +1,10 @@
+Parameters used for segmentation of circular1-2:
+Method used: ransac
+
+delta= 1.25
+mean-k= 50
+sigma= 0.375
+ctol= 1.4
+cmin= 20
+cmax= 7500
+ndist-weight= 0.1
