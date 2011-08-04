@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <pcl/ModelCoefficients.h>
 #include <pcl/point_types.h>
 #include <pcl/io/pcd_io.h>
@@ -15,13 +16,6 @@
 
 using namespace std;
 using namespace pcl;
-
-/* Applies an iterative two-stage segmentation to the supplied point-cloud.
-*  The first pass searches for all points that fit the given model (i.e. a plane) well enough, and segments them out.
-*  The second pass takes the remaining points after segmentation and searches for all sets of points close enough to
-*  each other and groups them into clusters.
-*  Essentially, the original point-cloud gets split up into its individual surface components.
-*/
 
 int
  main (int argc, char** argv)
@@ -163,7 +157,9 @@ int
 
   // Write the downsampled version to disk
   PCDWriter writer;
-  const string fname = argv[1];
+  string fname = argv[1];
+  fname.erase(fname.end()-4, fname.end());
+  writeParameters(pars, header.method_type, fname);
   writer.write<PointXYZ> (fname + "_downsampled.pcd", *cloud_filtered, false);
 
   size_t useful_segment_points = 0;
