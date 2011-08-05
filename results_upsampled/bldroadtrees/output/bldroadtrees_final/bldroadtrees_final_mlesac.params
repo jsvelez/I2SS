@@ -1,0 +1,10 @@
+Parameters used for segmentation of bldroadtrees_final:
+Method used: mlesac
+
+delta= 0.45
+mean-k= 80
+sigma= 1.3
+ctol= 1.3
+cmin= 20
+cmax= 15000
+ndist-weight= 0.1

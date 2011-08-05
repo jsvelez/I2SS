@@ -1,0 +1,8 @@
+DATASETS: bldroadtrees.pcd (original)
+          bldroadtrees_final.pcd (upsampled version)
+
+SEGMENTATION RESULTS:
+        This is a perfect example of one case where upsampling actually hinders segmentation instead of helping. The upsampled version seems to have intensified some ground features, making it look more uneven and 'bumpy', which resulted in a somewhat less accurate segmentation. At the same time, the original version demonstrates the usefulness of MLESAC over RANSAC when it's not easy to distinguish points belong to what objects; while the RANSAC method made a mess segmenting out most trees as planes, MLESAC achieved an almost perfect segmentation with each tree neatly organized into its own cluster.
+                          
+MISC. OBSERVATIONS:
+          --

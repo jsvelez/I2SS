@@ -1,0 +1,10 @@
+Parameters used for segmentation of aircraft1:
+Method used: ransac
+
+delta= 1
+mean-k= 90
+sigma= 0.7
+ctol= 1.6
+cmin= 20
+cmax= 15000
+ndist-weight= 0.1

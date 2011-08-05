@@ -1,0 +1,12 @@
+DATASETS: aircraft1.pcd (original)
+          aircraft1_final.pcd (upsampled version)
+
+SEGMENTATION RESULTS:
+        Curiously, both RANSAC and MLESAC return the exact same results. This is probably because the points in the input clouds have strong likelihood
+        (i.e. it is easy to tell which points are outliers relative to what plane), which often causes MLESAC estimation to reduce to the RANSAC case.
+        Upsampling the data seems to have made no actual difference. Still, we managed to achieve an ideal segmentation and successfully recognized the
+        aircraft as a separate object.
+                          
+MISC. OBSERVATIONS:
+          When comparing the original point-clouds to the combined output in all three versions, there seems to be some noticeable banding in the
+          results, even though the filtered cloud (pre-segmentation) has exactly or almost exactly the same number of points as the actual input.
