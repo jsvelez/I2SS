@@ -1,3 +1,5 @@
+//NOTE: This has yet to be implemented in the actual code
+
 #ifndef POINT_SEG_H_
 #define POINT_SEG_H_
 

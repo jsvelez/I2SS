@@ -1,0 +1,10 @@
+Parameters used for segmentation of curved_1:
+Method used: ransac
+
+delta= 1.4
+mean-k= 50
+sigma= 1
+ctol= 1.4
+cmin= 4
+cmax= 5000
+ndist-weight= 0.1

@@ -1,0 +1,10 @@
+Parameters used for segmentation of nonstan_bld1-alt:
+Method used: ransac
+
+delta= 2.28
+mean-k= 80
+sigma= 0.15
+ctol= 1.5
+cmin= 20
+cmax= 75000
+ndist-weight= 0.1

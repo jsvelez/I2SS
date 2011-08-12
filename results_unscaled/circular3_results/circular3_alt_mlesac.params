@@ -1,0 +1,10 @@
+Parameters used for segmentation of circular3_alt:
+Method used: mlesac
+
+delta= 1.05
+mean-k= 50
+sigma= 1.575
+ctol= 1.6
+cmin= 8
+cmax= 5000
+ndist-weight= 0.1

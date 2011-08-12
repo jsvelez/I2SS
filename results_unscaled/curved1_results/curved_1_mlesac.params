@@ -1,0 +1,10 @@
+Parameters used for segmentation of curved_1:
+Method used: mlesac
+
+delta= 1
+mean-k= 80
+sigma= 1
+ctol= 2.1
+cmin= 8
+cmax= 5000
+ndist-weight= 0.1

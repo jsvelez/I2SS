@@ -1,0 +1,10 @@
+Parameters used for segmentation of towers-alt:
+Method used: mlesac
+
+delta= 1.33
+mean-k= 80
+sigma= 0.15
+ctol= 1.5
+cmin= 20
+cmax= 100000
+ndist-weight= 0.1

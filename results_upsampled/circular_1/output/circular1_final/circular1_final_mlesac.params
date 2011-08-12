@@ -3,8 +3,8 @@ Method used: mlesac
 
 delta= 0.96
 mean-k= 150
-sigma= 0.52
-ctol= 0.315
+sigma= 1.52
+ctol= 1.215
 cmin= 20
 cmax= 7500
 ndist-weight= 0.1

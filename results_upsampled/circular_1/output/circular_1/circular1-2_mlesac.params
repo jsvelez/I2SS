@@ -1,8 +1,8 @@
 Parameters used for segmentation of circular1-2:
 Method used: mlesac
 
-delta= 0.8
-mean-k= 90
+delta= 0.66
+mean-k= 50
 sigma= 0.25
 ctol= 1.4
 cmin= 20

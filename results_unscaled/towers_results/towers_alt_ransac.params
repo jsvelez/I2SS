@@ -1,0 +1,10 @@
+Parameters used for segmentation of towers_alt:
+Method used: ransac
+
+delta= 2.7
+mean-k= 50
+sigma= 1.575
+ctol= 2
+cmin= 8
+cmax= 25000
+ndist-weight= 0.1

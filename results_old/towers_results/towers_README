@@ -1,0 +1,10 @@
+DATASET: nonstan_bld1.pcd
+
+SEGMENTATION RESULTS:
+   -> using RANSAC: Surprisingly clean segmentation, considering the size of the data-set and the number of isolated objects involved. The roof pieces
+                    appear to have been segmented by their relative height to each other, which hints as 
+
+   -> using MLESAC: The results were noticeably poorer than RANSAC's case, even when using normal-plane segmentation, but I2SS still managed to hit five
+                    towers without confusion. Several thin patches of ground near the edges were segmented out as a result of using normals.
+
+Conclusion: Definitely not one of the simplest cases, but segmentation quality is decent enough for what we wanted to achieve.
